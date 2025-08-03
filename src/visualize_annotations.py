@@ -37,13 +37,17 @@ def visualize(image_name, bboxes):
     plt.axis('off')
     plt.show()
 
-# visualizng some of the first few examples
+image_id_to_filename = {img["id"]: img["name"] for img in annotations["images"]}
+
 count = 0
-for item in annotations:
-    image_name = item['name']
-    bboxes = [anno['bbox'] for anno in item['annotations']]
-    visualize(image_name, bboxes)
-    
+for item in annotations["annotations"]:
+    image_id = item["image_id"]
+    bbox = item["bbox"]
+
+    image_name = image_id_to_filename[image_id]
+    visualize(image_name, [bbox])  # Wrap single bbox in list for consistency
+
     count += 1
     if count >= 5:
         break
+
