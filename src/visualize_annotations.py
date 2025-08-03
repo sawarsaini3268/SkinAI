@@ -43,14 +43,19 @@ count = 0
 for item in annotations["annotations"]:
     image_id = item["image_id"]
     print(item)
-# break  # just print one for now
 
-#     bbox = item["bbox"]
 
-#     image_name = image_id_to_filename[image_id]
-#     visualize(image_name, [bbox])  # Wrap single bbox in list for consistency
+bboxes = []
+for anno in item['annotations']:
+    x, y = anno['coordinates']
+    r = anno['radius']
+    bboxes.append([x - r, y - r, 2 * r, 2 * r])  # convert to bounding box format
 
-#     count += 1
-#     if count >= 5:
-#         break
+
+    image_name = image_id_to_filename[image_id]
+    visualize(image_name, bboxes)  # wrap single bbox in list for consistency
+
+    count += 1
+    if count >= 5:
+        break
 
