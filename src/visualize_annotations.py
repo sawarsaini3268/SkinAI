@@ -16,8 +16,8 @@ with open(ANNOTATION_FILE, 'r') as f:
 with open(ANNOTATION_FILE, 'r') as f:
     annotations = json.load(f)
 
-print("First item in annotations:", annotations[0])
-print("Type of first item:", type(annotations[0]))
+print("Type of annotations:", type(annotations))
+print("Keys in annotations:", annotations.keys())
 
 # display an image with bounding boxes 
 def visualize(image_name, bboxes):
