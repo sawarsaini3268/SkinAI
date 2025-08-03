@@ -42,8 +42,6 @@ image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["imag
 count = 0
 for item in annotations["annotations"]:
     image_id = item["image_id"]
-    print(item)
-
 
 bboxes = []
 for anno in item['annotations']:
