@@ -9,20 +9,26 @@ DATA_DIR = "../data"
 IMG_DIR = os.path.join(DATA_DIR, "images")
 ANNOTATION_FILE = os.path.join(DATA_DIR, "Acne04-v2_annotations.json")
 
-# load annotations from json file
-with open(ANNOTATION_FILE, 'r') as f:
-    annotations = json.load(f)
-
+# load annotations
 with open(ANNOTATION_FILE, 'r') as f:
     annotations = json.load(f)
 
 print("Type of annotations:", type(annotations))
 print("Keys in annotations:", annotations.keys())
 
-# display an image with bounding boxes 
+# visualization function
 def visualize(image_name, bboxes):
     img_path = os.path.join(IMG_DIR, image_name)
+    
+    if not os.path.exists(img_path):
+        print(f"⚠️ File not found: {img_path}")
+        return
+    
     image = cv2.imread(img_path)
+    if image is None:
+        print(f"⚠️ Unable to load image (possibly corrupted): {img_path}")
+        return
+    
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     fig, ax = plt.subplots(1)
@@ -37,26 +43,32 @@ def visualize(image_name, bboxes):
     plt.axis('off')
     plt.show()
 
+# map image_id to filename 
 image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["images"]}
 
-# Step 1: Create a dictionary to group boxes per image
+# group bboxes by image_id 
 image_to_bboxes = {}
 
 for item in annotations["annotations"]:
     image_id = item["image_id"]
     x, y = item["coordinates"]
     r = item["radius"]
-    bbox = [x - r, y - r, 2 * r, 2 * r]
+    bbox = [x - r, y - r, 2 * r, 2 * r]  # convert circle to square bbox
 
     if image_id not in image_to_bboxes:
         image_to_bboxes[image_id] = []
 
     image_to_bboxes[image_id].append(bbox)
 
-# Step 2: Visualize first few examples
+# visualize first few images with annotations 
 count = 0
 for image_id, bboxes in image_to_bboxes.items():
-    image_name = image_id_to_filename[image_id]
+    image_name = image_id_to_filename.get(image_id)
+
+    if not image_name:
+        print(f"⚠️ Image ID {image_id} not found in image list.")
+        continue
+
     visualize(image_name, bboxes)
 
     count += 1
