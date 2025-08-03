@@ -13,6 +13,12 @@ ANNOTATION_FILE = os.path.join(DATA_DIR, "Acne04-v2_annotations.json")
 with open(ANNOTATION_FILE, 'r') as f:
     annotations = json.load(f)
 
+with open(ANNOTATION_FILE, 'r') as f:
+    annotations = json.load(f)
+
+print("First item in annotations:", annotations[0])
+print("Type of first item:", type(annotations[0]))
+
 # display an image with bounding boxes 
 def visualize(image_name, bboxes):
     img_path = os.path.join(IMG_DIR, image_name)
