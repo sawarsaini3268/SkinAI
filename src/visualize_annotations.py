@@ -37,7 +37,7 @@ def visualize(image_name, bboxes):
     plt.axis('off')
     plt.show()
 
-image_id_to_filename = {img["id"]: img["name"] for img in annotations["images"]}
+image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["images"]}
 
 count = 0
 for item in annotations["annotations"]:
