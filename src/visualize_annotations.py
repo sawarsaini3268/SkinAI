@@ -39,21 +39,26 @@ def visualize(image_name, bboxes):
 
 image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["images"]}
 
-count = 0
+# Step 1: Create a dictionary to group boxes per image
+image_to_bboxes = {}
+
 for item in annotations["annotations"]:
     image_id = item["image_id"]
+    x, y = item["coordinates"]
+    r = item["radius"]
+    bbox = [x - r, y - r, 2 * r, 2 * r]
 
-bboxes = []
-for anno in item['annotations']:
-    x, y = anno['coordinates']
-    r = anno['radius']
-    bboxes.append([x - r, y - r, 2 * r, 2 * r])  # convert to bounding box format
+    if image_id not in image_to_bboxes:
+        image_to_bboxes[image_id] = []
 
+    image_to_bboxes[image_id].append(bbox)
 
+# Step 2: Visualize first few examples
+count = 0
+for image_id, bboxes in image_to_bboxes.items():
     image_name = image_id_to_filename[image_id]
-    visualize(image_name, bboxes)  # wrap single bbox in list for consistency
+    visualize(image_name, bboxes)
 
     count += 1
     if count >= 5:
         break
-
