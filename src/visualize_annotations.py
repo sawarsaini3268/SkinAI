@@ -42,12 +42,15 @@ image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["imag
 count = 0
 for item in annotations["annotations"]:
     image_id = item["image_id"]
-    bbox = item["bbox"]
+    print(item)
+# break  # just print one for now
 
-    image_name = image_id_to_filename[image_id]
-    visualize(image_name, [bbox])  # Wrap single bbox in list for consistency
+#     bbox = item["bbox"]
 
-    count += 1
-    if count >= 5:
-        break
+#     image_name = image_id_to_filename[image_id]
+#     visualize(image_name, [bbox])  # Wrap single bbox in list for consistency
+
+#     count += 1
+#     if count >= 5:
+#         break
 
