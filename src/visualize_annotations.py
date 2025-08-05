@@ -47,9 +47,9 @@ def visualize(image_name, bboxes):
 image_id_to_filename = {img["id"]: img["file_name"] for img in annotations["images"]}
 
 # check for suspicious filenames
-for k, v in image_id_to_filename.items():
-    if "level" in v:
-        print("Suspicious filename:", v)
+for img_id, fname in image_id_to_filename.items():
+    print(f"Image ID: {img_id}, filename: {fname}")
+
 
 # group bboxes by image_id 
 image_to_bboxes = {}
