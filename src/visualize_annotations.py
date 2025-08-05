@@ -20,7 +20,7 @@ print("Keys in annotations:", annotations.keys())
 def visualize(image_name, bboxes):
     img_path = os.path.join(IMG_DIR, image_name)
     
-    if not os.path.exists(img_path):
+    if not os.path.exists(img_path): 
         print(f"!!!File not found: {img_path}")
         return
     
