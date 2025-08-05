@@ -21,7 +21,7 @@ def visualize(image_name, bboxes):
     img_path = os.path.join(IMG_DIR, image_name)
     
     if not os.path.exists(img_path):
-        print(f"File not found: {img_path}")
+        print(f"!!!File not found: {img_path}")
         return
     
     image = cv2.imread(img_path)
@@ -64,6 +64,7 @@ for item in annotations["annotations"]:
 count = 0
 for image_id, bboxes in image_to_bboxes.items():
     image_name = image_id_to_filename.get(image_id)
+    print("Trying to load:", image_name) # line added for debugging
 
     if not image_name:
         print(f"Image ID {image_id} not found in image list.")
