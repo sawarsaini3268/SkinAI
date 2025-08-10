@@ -6,7 +6,9 @@ import torch
 torch.backends.cudnn.enabled = False
  
 # Load the model.
-model = YOLO('yolov8x.pt')
+model = YOLO('yolov8s.pt') # smaller, downloads fresh
+# fallback if downloads are blocked:
+# model = YOLO('yolov8s.yaml')  # start from scratch (no pretrained weights)
  
 # Training.
 """
