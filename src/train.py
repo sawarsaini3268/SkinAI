@@ -18,7 +18,7 @@ model = YOLO('yolov8x.pt')
 - name: Name of the results directory for runs/detect.
 """
 results = model.train(
-    data='acne_detection.yaml',
+    data=r"C:\Users\sawar\OneDrive\SkinAI\acne_detection.yaml",
     imgsz=1280,
     epochs=600, 
     patience=200,

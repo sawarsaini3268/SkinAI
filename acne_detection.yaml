@@ -1,0 +1,5 @@
+train: r"C:\Users\sawar\OneDrive\SkinAI\dataset\images\train" 
+val: r"C:\Users\sawar\OneDrive\SkinAI\dataset\images\val"
+
+nc: 1
+names: ['acne']
