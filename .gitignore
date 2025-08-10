@@ -1,1 +1,11 @@
-__pycache__/ 
+# datasets & outputs
+dataset/
+examples/
+runs/
+*.pt
+
+# don’t track images
+*.jpg
+*.jpeg
+*.png
+*.txt
