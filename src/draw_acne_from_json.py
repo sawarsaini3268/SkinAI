@@ -48,8 +48,13 @@ for img_dict in labels_dict["images"]:
     plt.axis("off")
     plt.show()
 
-    # save to examples/
-    out_path = os.path.join(out_dir, filename)
-    ok = cv2.imwrite(out_path, img)
-    if not ok:
-        print(f"[WARN] Could not write: {out_path}")
+# save to examples
+rel = filename.lstrip("/\\")
+out_path = os.path.join(out_dir, rel)
+os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+ok = cv2.imwrite(out_path, img)
+if not ok:
+    print(f"[WARN] Could not write: {out_path}")
+else:
+    print(f"[OK] Saved: {out_path}")
