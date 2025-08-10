@@ -9,3 +9,9 @@ runs/
 *.jpeg
 *.png
 *.txt
+
+# OneDrive / temp files
+~$*
+*.tmp
+*.lnk
+*conflicted copy*
