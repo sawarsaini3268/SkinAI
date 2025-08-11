@@ -1,14 +1,24 @@
+from pathlib import Path
 from ultralytics import YOLO
 from datetime import date
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-import torch
-torch.backends.cudnn.enabled = False
- 
-# Load the model.
-model = YOLO('yolov8s.pt') # smaller, downloads fresh
-# fallback if downloads are blocked:
-# model = YOLO('yolov8s.yaml')  # start from scratch (no pretrained weights)
+
+# Repo root = one level up from /src
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "acne_detection.yaml"   # relative YAML
+RUNS_DIR = ROOT / "runs"              # keep runs inside the repo
+
+model = YOLO("yolov8s.pt")  # or 'yolov8s.yaml' to avoid downloading weights
+
+results = model.train(
+    data=str(DATA),
+    imgsz=1280,
+    epochs=130,
+    batch=6,
+    project=str(RUNS_DIR),                         # ensures outputs stay in repo
+    name=f'y8s_acne_{date.today():%Y%m%d}',       # run name w/ date
+    deterministic=True
+)
+
  
 # Training.
 """
@@ -19,10 +29,3 @@ model = YOLO('yolov8s.pt') # smaller, downloads fresh
 - batch: The batch size for data loader. You may increase or decrease it according to your GPU memory availability.
 - name: Name of the results directory for runs/detect.
 """
-results = model.train(
-    data=r"C:\Users\sawar\OneDrive\SkinAI\acne_detection.yaml",
-    imgsz=1280,
-    epochs=130, 
-    patience=200,
-    batch=6,
-    name='yolov8x_1280_acne_detection_'+date.today().strftime("%d%m%Y")+'_')
