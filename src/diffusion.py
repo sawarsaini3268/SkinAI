@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # path stuff
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = PROJECT_ROOT / "data" / "skin_ingredients_master_with_diffusion.csv"
-OUTDIR = PROJECT_ROOT / "runs" / "phase2"
+OUTDIR = PROJECT_ROOT / "runs" / "diffusion"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # --- Simulation settings ---
