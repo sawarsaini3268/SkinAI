@@ -94,6 +94,9 @@ def simulate_1d_diffusion(D, L, dx, hours, c0=1.0):
 
 def run_demo(ingredients, vehicle_visc_cP=100.0):
     df = load_metadata(DATA_PATH)
+    print(f"Loaded CSV from: {DATA_PATH}")
+    print(f"Found {len(df)} rows. Running for: {ingredients} (vehicle ~{vehicle_visc_cP} cP)")
+
     use = df[df["ingredient_common_name"].isin(ingredients)].copy()
     if use.empty:
         raise RuntimeError("No matching ingredients found.")
